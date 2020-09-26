@@ -48,6 +48,7 @@ def solve(ar, i = 0):
 @app.route('/clean_floor', methods=['POST'])
 def clean_floor():
     data = request.get_json();
+    logging.info("data from request {}".format(data))
     # logging.info("data sent for evaluation {}".format(data))
     tests = data["tests"]
     # logging.info("My result :{}".format(result))
