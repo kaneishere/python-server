@@ -16,7 +16,7 @@ w = {'maPomegranate': 59,
  'maAvocado': 32,
  'maRambutan': 42,
  'maApple': 31,
- 'maWatermelon': 84} 
+ 'maWatermelon': 83} 
 @app.route('/fruitbasket', methods=['POST'])
 def fruitbasket():
     data = request.get_data() 
