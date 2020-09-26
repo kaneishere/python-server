@@ -6,11 +6,69 @@ from flask import request, jsonify;
 from codeitsuisse import app;
 
 logger = logging.getLogger(__name__)
+from ortools.linear_solver import pywraplp
+
+
+
+def create_data_model(w,b):
+    """Create the data for the example."""
+    data = {}
+    weights = w
+    values =  [1 for i in weights]
+    data['weights'] = weights
+    data['values'] = values
+    data['items'] = list(range(len(weights)))
+    data['num_items'] = len(weights)
+    num_bins = len(b)
+    data['bins'] = list(range(num_bins))
+    data['bin_capacities'] = b
+    return data
+
+
+
+
+def solver(w,b):
+    data = create_data_model(w,b)
+
+    # Create the mip solver with the CBC backend.
+    solver = pywraplp.Solver.CreateSolver('multiple_knapsack_mip', 'CBC')
+
+    # Variables
+    # x[i, j] = 1 if item i is packed in bin j.
+    x = {}
+    for i in data['items']:
+        for j in data['bins']:
+            x[(i, j)] = solver.IntVar(0, 1, 'x_%i_%i' % (i, j))
+
+    # Constraints
+    # Each item can be in at most one bin.
+    for i in data['items']:
+        solver.Add(sum(x[i, j] for j in data['bins']) <= 1)
+    # The amount packed in each bin cannot exceed its capacity.
+    for j in data['bins']:
+        solver.Add(
+            sum(x[(i, j)] * data['weights'][i]
+                for i in data['items']) <= data['bin_capacities'][j])
+
+    # Objective
+    objective = solver.Objective()
+
+    for i in data['items']:
+        for j in data['bins']:
+            objective.SetCoefficient(x[(i, j)], data['values'][i])
+    objective.SetMaximization()
+
+    status = solver.Solve()
+
+    if status == pywraplp.Solver.OPTIMAL:
+        return int(objective.Value())
 
 def solve(data):
     bk,dy=data['books'],data['days']
     bk.sort()
     dy.sort()
+    if (len(bk)<50):
+        return solver(bk,dy)
     nb,nd=len(bk),len(dy)
     ans=0
     for i in range(nb):
@@ -58,7 +116,7 @@ def olympiad_of_babylon():
     return json.dumps(result);
 
 '''
-data={'numberOfDays': 10, 'numberOfBooks': 50, 'books': [70, 57, 40, 35, 27, 29, 61, 53, 54, 71, 28, 49, 72, 64, 44, 56, 47, 66, 29, 32, 42, 51, 53, 43, 69, 48, 68, 73, 28, 55, 77, 63, 60, 35, 33, 51, 67, 79, 31, 29, 37, 31, 65, 50, 39, 75, 62, 35, 80, 26], 'days': [105, 86, 118, 99, 85, 108, 109, 116, 92, 119]}
+data= {'numberOfDays': 5, 'numberOfBooks': 16, 'books': [38, 42, 37, 80, 74, 27, 56, 65, 50, 67, 79, 47, 47, 62, 46, 74], 'days': [102, 92, 95, 110, 120]}
 print(solve(data))
 data={'numberOfDays': 5, 'numberOfBooks': 16, 'books': [71, 79, 57, 36, 36, 63, 67, 69, 52, 31, 61, 37, 42, 48, 69, 52], 'days': [118, 85, 105, 116, 92]}
 '''
