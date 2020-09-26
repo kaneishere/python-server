@@ -221,19 +221,19 @@ def solve(data):
         if l==0:
             for t in range(100):
                 if cnt==tar:
-                    ans['encryptionCount'] = t
+                    #ans['encryptionCount'] = t
                     break
-                cnt+=ord(ori[0])
+                cnt+=cnt
                 if cnt>122:
                     cnt=(cnt-123)%26+97
         else:
-            tmp=sum(has)+nn
             for t in range(100):
                 print(cnt,t)
                 if cnt==tar:
-                    ans['encryptionCount'] = t
+                    #ans['encryptionCount'] = t
                     break
                 print(has,nn)
+                tmp=sum(has)+nn
                 for i in range(len(has)):
                     has[i]+=tmp
                     if has[i]>122:
@@ -241,7 +241,7 @@ def solve(data):
                 cnt+=tmp
                 if cnt>122:
                     cnt=(cnt-123)%26+97
-        s=ori
+        #s=ori
         '''
         s = ' '.join(segment(ori))
         tmp = s.split(' ')
