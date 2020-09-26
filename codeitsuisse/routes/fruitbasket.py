@@ -27,7 +27,7 @@ def fruitbasket():
     # logging.info("My result :{}".format(result))
     ans = 0
     for key,value in data.items():
-       ans +=  w[key] * value
+         ans +=  w[key] * value
 
     
     # print(ans)
