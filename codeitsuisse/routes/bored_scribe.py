@@ -216,6 +216,7 @@ def solve(data):
         has=[]
         for c in ori[ind:ind+l]:
             has.append(ord(c))
+        cnt=sum(has)
         ans['encryptionCount'] = 0
         if l==0:
             cnt=ord(ori[0])
