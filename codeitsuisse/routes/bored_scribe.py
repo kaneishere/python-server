@@ -221,6 +221,8 @@ def solve(data):
             if cnt*t%26==offset:
                 ans['encryptionCount'] = t
                 break
+        s=ori
+        '''
         s = ' '.join(segment(ori))
         tmp = s.split(' ')
         p=0
@@ -236,6 +238,7 @@ def solve(data):
                                 s=' '.join(tmp[:i])+' '
                             s+=ttmp+' '+' '.join(tmp[iss:])
                             break
+        '''
         ans['originalText'] = s
         res.append(ans)
     return res
