@@ -11,9 +11,9 @@ logger = logging.getLogger(__name__)
 def sort():
     data = request.get_json();
     # print(data)
-    logging.info("data sent for evaluation {}".format(data))
+    # logging.info("data sent for evaluation {}".format(data))
     data.sort() 
-    logging.info("My result :{}".format(data))
+    # logging.info("My result :{}".format(data))
     return json.dumps(data);
 
 
