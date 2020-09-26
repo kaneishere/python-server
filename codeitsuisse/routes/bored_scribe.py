@@ -39,7 +39,6 @@ def solve(data):
         s = ' '.join(segment(ori))
         tmp = s.split(' ')
         p=0
-        '''
         if 'palindrome' in tmp:
             if 'is' in tmp:
                 iss=tmp.index('is')
@@ -52,16 +51,15 @@ def solve(data):
                                 s=' '.join(tmp[:i])+' '
                             s+=ttmp+' '+' '.join(tmp[iss:])
                             break
-        '''
         ans['originalText'] = s
         res.append(ans)
     return res
 @app.route('/bored-scribe', methods=['POST'])
 def bored_scribe():
     data = request.get_json();
-    logging.info("data sent for evaluation {}".format(data))
+    #logging.info("data sent for evaluation {}".format(data))
     result=solve(data)
-    logging.info("My result :{}".format(result))
+    #logging.info("My result :{}".format(result))
     return json.dumps(result);
 
 '''
