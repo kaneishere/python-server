@@ -245,9 +245,9 @@ def solve(data):
 @app.route('/bored-scribe', methods=['POST'])
 def bored_scribe():
     data = request.get_json();
-    #logging.info("data sent for evaluation {}".format(data))
+    logging.info("data sent for evaluation {}".format(data))
     result=solve(data)
-    #logging.info("My result :{}".format(result))
+    logging.info("My result :{}".format(result))
     return json.dumps(result);
 
 '''
