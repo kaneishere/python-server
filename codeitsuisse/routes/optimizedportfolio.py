@@ -1,5 +1,6 @@
 import logging
 import json
+import functools
 
 from flask import request, jsonify;
 
@@ -12,11 +13,20 @@ def solve(data):
     for t in data:
         v,spot=t['Portfolio']['Value'],t['Portfolio']['SpotPrcVol']
         a=t['IndexFutures']
-        for i in a:
+        rat,fpr,nof=float('inf'),float('inf'),float('inf')
+        for ind,i in enumerate(a):
             i['OptimalHedgeRatio']=round(i["CoRelationCoefficient"]*spot/i["FuturePrcVol"],3)
             i["NumFuturesContract"]=i['OptimalHedgeRatio']*v/(i["IndexFuturePrice"]*i["Notional"])
-        a.sort(key=lambda x:(x["OptimalHedgeRatio"],x["NumFuturesContract"]))
-        ans.append({"HedgePositionName":a[0]["Name"],"OptimalHedgeRatio":a[0]["OptimalHedgeRatio"],"NumFuturesContract":int(a[0]["NumFuturesContract"]+0.5)})
+
+            if i['OptimalHedgeRatio']<rat and i['FuturePrcVol']<fpr:
+                cur=ind
+            elif i['OptimalHedgeRatio']>=rat and i['FuturePrcVol']>=fpr:
+                continue
+            elif (i['NumFuturesContract']<nof):
+                cur=ind
+            rat,fpr,nof=a[cur]['OptimalHedgeRatio'],a[cur]['FuturePrcVol'],a[cur]['NumFuturesContract']
+
+        ans.append({"HedgePositionName":a[cur]["Name"],"OptimalHedgeRatio":a[cur]["OptimalHedgeRatio"],"NumFuturesContract":int(a[cur]["NumFuturesContract"]+0.5)})
     return ans
 
 @app.route('/optimizedportfolio', methods=['POST'])
