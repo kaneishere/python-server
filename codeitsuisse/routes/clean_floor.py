@@ -7,10 +7,15 @@ from codeitsuisse import app;
 
 logger = logging.getLogger(__name__)
 
-def solve(ar, i = 0):
+memo = list()
+def solve(ar, memo, i = 0):
     if sum(ar) == 0:
         return 0
-    
+    total = 0 if i == 0 else sum(ar[:i]) 
+
+    if total in memo[i]: 
+        return memo[i][total]
+
     mx = 1000000000000000
     left = mx
     right = mx
@@ -21,7 +26,7 @@ def solve(ar, i = 0):
             add = True
         else:
             ar[i-1] -= 1
-        left = solve(ar, i-1) + 1
+        left = solve(ar, memo, i-1) + 1
         if add:
             ar[i-1] -= 1
         else:
@@ -35,13 +40,14 @@ def solve(ar, i = 0):
             add = True
         else:
             ar[i+1] -= 1
-        right = solve(ar, i+1) + 1
+        right = solve(ar, memo, i+1) + 1
         if add:
             ar[i+1] -= 1
         else:
             ar[i-1] += 1
 
-    return min(left,right)
+    memo[i][total] = min(left,right)
+    return memo[i][total]
 
 
 
@@ -58,7 +64,8 @@ def clean_floor():
     for key in keys:
         ar = tests[key]["floor"]
         print(ar)
-        ans = solve(ar)
+        memo = [{} for i in range(n)]
+        ans = solve(ar, memo)
         results["answers"][key] = ans
 
     return json.dumps(results);
