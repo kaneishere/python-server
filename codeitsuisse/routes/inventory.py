@@ -8,7 +8,7 @@ from codeitsuisse import app;
 logger = logging.getLogger(__name__)
 
 def findsol(str1, str2):
-    dp =[ [(0,"") for i in range(len(str1)+5)] for j in range(len(str2)+5)]
+    dp =[ [(0,"") for i in range(len(str2)+5)] for j in range(len(str1)+5)]
     for m in range(len(str1) + 1):
         for n in range(len(str2) + 1):
 

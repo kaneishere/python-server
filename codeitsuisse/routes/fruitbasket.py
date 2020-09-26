@@ -8,7 +8,7 @@ from codeitsuisse import app;
 
 logger = logging.getLogger(__name__)
 
-
+prv = None
 
 @app.route('/fruitbasket', methods=['POST'])
 def fruitbasket():
@@ -18,11 +18,14 @@ def fruitbasket():
     random.seed() 
     # logging.info("My result :{}".format(result))
     ans = 0
+    guesses = []
     if data:
         for key, value in data.items():
-            ans += value * random.randint(1,100)
+            guess = random.randint(1,100)
+            ans += value * guess 
+            guesses.append((value, guess))
     print(ans)
-
+    logging.info("current guess: {}".format(guesses))
     return str(ans) 
 
 
