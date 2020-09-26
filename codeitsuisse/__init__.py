@@ -14,5 +14,5 @@ import codeitsuisse.routes.cluster
 import codeitsuisse.routes.social_distancing
 import codeitsuisse.routes.optimizedportfolio
 #import codeitsuisse.routes.slsm
-#import codeitsuisse.routes.bored_scribe
+import codeitsuisse.routes.bored_scribe
 import codeitsuisse.routes.snakeladder
