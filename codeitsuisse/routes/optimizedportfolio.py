@@ -18,11 +18,10 @@ def solve(data):
             i['OptimalHedgeRatio']=round(i["CoRelationCoefficient"]*spot/i["FuturePrcVol"],3)
             i["NumFuturesContract"]=i['OptimalHedgeRatio']*v/(i["IndexFuturePrice"]*i["Notional"])
 
-            if i['OptimalHedgeRatio']<rat and i['FuturePrcVol']<fpr:
-                cur=ind
-            elif i['OptimalHedgeRatio']>=rat and i['FuturePrcVol']>=fpr:
-                continue
-            elif (i['NumFuturesContract']<nof):
+            if i['OptimalHedgeRatio']==rat and i['FuturePrcVol']==fpr or i['OptimalHedgeRatio']<rat and i['FuturePrcVol']>fpr or i['OptimalHedgeRatio']>rat and i['FuturePrcVol']<fpr:
+                if (i['NumFuturesContract']<nof):
+                    cur=ind
+            elif i['OptimalHedgeRatio']<=rat and i['FuturePrcVol']<=fpr:
                 cur=ind
             rat,fpr,nof=a[cur]['OptimalHedgeRatio'],a[cur]['FuturePrcVol'],a[cur]['NumFuturesContract']
 
