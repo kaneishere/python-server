@@ -12,7 +12,8 @@ prv = None
 
 @app.route('/fruitbasket', methods=['POST'])
 def fruitbasket():
-    data = request.get_json() 
+    data = request.get_data() 
+    data = json.loads(data.decode('utf-8'))
     logging.info("data from request {}".format(data))
     # logging.info("data sent for evaluation {}".format(data))
     random.seed() 
