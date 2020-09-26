@@ -17,11 +17,11 @@ def solve(tests):
             if s==0:
                 break
             res+=1
-            if x[1]==0:
-                x[1]+=1
+            if x[i]==0:
+                x[i]+=1
                 s+=1
             else:
-                x[1]-=1
+                x[i]-=1
                 s-=1
             if x[i-1]!=0:
                 s-=x[i-1]
@@ -35,11 +35,19 @@ def solve(tests):
                         s-=x[i]-1
                         x[i]=1
                 else:
-                    tmp=x[i]-x[i-1]+1
-                    s-=tmp
-                    x[i]-=tmp
+                    s-=x[i-1]-1
+                    x[i]-=x[i-1]-1
+                x[i-1]=0
                 if s==0:
                     break
+
+                res+=1
+                if x[i]==0:
+                    x[i]+=1
+                    s+=1
+                else:
+                    x[i]-=1
+                    s-=1
         if s!=0:
             tmp=x[len(x)-1]
             res+=2*tmp
