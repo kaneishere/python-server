@@ -38,7 +38,7 @@ def diff(a,b, name_to_genome):
     return memo[a+b]
 
 
-def dfs(explored_sets, cur_gene, ans, name_to_genome):
+def dfs(explored_sets, cur_gene, ans, name_to_genome, non_silent_mutation):
 
     explore = False
     to_explore = []
@@ -65,14 +65,18 @@ def dfs(explored_sets, cur_gene, ans, name_to_genome):
     # logging.info("to_explore: {}".format(to_explore))
     for gene in to_explore:
         non_silent = False
-        if diff(cur_gene, gene, name_to_genome)[1]:
+        logging.info("non_silent: {}".format((cur_gene in non_silent_mutation and non_silent_mutation[gene]) or (cur_gene not in non_silent_mutation)))
+        if  ((cur_gene in non_silent_mutation and non_silent_mutation[gene]) or (cur_gene not in non_silent_mutation)):
+            ans.append(gene)
+        elif diff(cur_gene, gene, name_to_genome)[1]:
             non_silent = True
             prv = ans.pop()
             ans.append("*" + prv)
             ans.append(gene)
         else:
             ans.append(gene)
-        dfs(explored_sets, gene, ans, name_to_genome)
+        logging.info("ans: {}".format(ans))
+        dfs(explored_sets, gene, ans, name_to_genome, non_silent_mutation)
         ans.pop()
         if non_silent:
             ans.pop()
@@ -101,11 +105,19 @@ def contact_trace():
     # m -> name, genome
     # logging.info("data from cluster {}".format(cluster))
     name_to_gene = {}
+    non_silent_mutation = {}
     for c in cluster:
         name_to_gene[c['name']] = c['genome']
+        if 'nonSilentMutation' in c:
+            non_silent_mutation[c['name']] = c['nonSilentMutation']
 
     name_to_gene[origin['name']] = origin['genome']
     name_to_gene[infected['name']] = infected['genome']
+    if 'nonSilentMutation' in origin:
+        non_silent_mutation[origin['name']] = origin['nonSilentMutation']
+    if 'nonSilentMutation' in infected:
+        non_silent_mutation[infected['name']] = infected['nonSilentMutation']
+    
     # logging.info("data from name_to_gene {}".format(name_to_gene)) 
 
     explored_sets = {}
@@ -116,8 +128,8 @@ def contact_trace():
     
     ans = [infected['name']]
 
-
-    dfs(explored_sets, infected['name'], ans, name_to_gene)
+    logging.info("non_silent {}".format(non_silent_mutation))
+    dfs(explored_sets, infected['name'], ans, name_to_gene, non_silent_mutation)
     logging.info("data: {}".format(data))
     logging.info("answers: {}".format(answers))
     return json.dumps(answers)
