@@ -82,8 +82,10 @@ def slsmsolution(boardSize,players,jumps):
     tem = []
     check0 = 0
     check1 = 0
+    sema = 0
     if(ans[0] == 1):
         ans[1] -= 1
+        sema = 1
         if(isjumppoint[shortpath[1]-1] and not issnake[shortpath[1]-1]):
             check1 = 1
     else:
@@ -98,6 +100,7 @@ def slsmsolution(boardSize,players,jumps):
         for y in range(players):
             tem.append(x)
 
+    print(check0, check1, "SADFSGFHDFJGHGFFGFG")
     x = ans[-2]
     if(check1):
         for y in range(players-1):
@@ -118,7 +121,7 @@ def slsmsolution(boardSize,players,jumps):
         for y in range(players):
             tem.append(x)
 
-    if(ans[-1]==1):
+    if(sema):        
         tem[-1-players] += 1
     else:
         tem[-1]+=1
