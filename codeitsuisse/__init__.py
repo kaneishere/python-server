@@ -9,3 +9,6 @@ import codeitsuisse.routes.fruitbasket
 import codeitsuisse.routes.inventory
 import codeitsuisse.routes.GMO
 import codeitsuisse.routes.olympiad_of_babylon
+import codeitsuisse.routes.contact_trace
+import codeitsuisse.routes.cluster
+import codeitsuisse.routes.social_distancing
