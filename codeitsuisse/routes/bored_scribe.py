@@ -4,14 +4,14 @@ from wordsegment import load, segment
 
 from flask import request, jsonify;
 
-#from codeitsuisse import app;
+from codeitsuisse import app;
 
 
 from random import randrange
 import string
 import math
 
-#logger = logging.getLogger(__name__)
+logger = logging.getLogger(__name__)
 
 class CaesarCipher(object):
     def __init__(self, message=None, encode=False, decode=False, offset=False,
@@ -215,15 +215,21 @@ def solve(data):
                     cnt+=1
         for c in ori[ind:ind+l]:
             cnt+=ord(c)
-        print(cnt)
+        ans['encryptionCount'] = 0
         if l==0:
             cnt=ord(ori[0])
-        print(cnt,offset)
-        ans['encryptionCount'] = 0
-        for t in range(26):
-            if cnt*t%26==offset:
-                ans['encryptionCount'] = t
-                break
+            for t in range(100):
+                if cnt%26==offset:
+                    ans['encryptionCount'] = t
+                    break
+                cnt+=cnt
+                if cnt>122:
+                    cnt=(cnt-122)%26+96
+        else:
+            for t in range(26):
+                if cnt*t%26==offset:
+                    ans['encryptionCount'] = t
+                    break
         s=ori
         '''
         s = ' '.join(segment(ori))
@@ -245,7 +251,6 @@ def solve(data):
         ans['originalText'] = s
         res.append(ans)
     return res
-'''
 @app.route('/bored-scribe', methods=['POST'])
 def bored_scribe():
     data = request.get_json();
@@ -254,6 +259,6 @@ def bored_scribe():
     logging.info("My result :{}".format(result))
     return json.dumps(result);
 '''
-data=[ { "id": 1, "encryptedText": "bcdef" } ]
+data=[ { "id": 1, "encryptedText": "bbdef" } ]
 print(solve(data))
-
+'''
