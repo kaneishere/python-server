@@ -116,7 +116,7 @@ def slsmsolution(boardSize,players,jumps):
         for y in range(players):
             tem.append(x)
 
-    if(ans[0]==1):
+    if(ans[-1]==1):
         tem[-1-players] += 1
     else:
         tem[-1]+=1
