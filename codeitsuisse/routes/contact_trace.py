@@ -99,14 +99,14 @@ def contact_trace():
     origin = data["origin"]
     cluster = data["cluster"]
     # m -> name, genome
-    logging.info("data from cluster {}".format(cluster))
+    # logging.info("data from cluster {}".format(cluster))
     name_to_gene = {}
     for c in cluster:
         name_to_gene[c['name']] = c['genome']
 
     name_to_gene[origin['name']] = origin['genome']
     name_to_gene[infected['name']] = infected['genome']
-    logging.info("data from name_to_gene {}".format(name_to_gene)) 
+    # logging.info("data from name_to_gene {}".format(name_to_gene)) 
 
     explored_sets = {}
     for key, value in name_to_gene.items():
