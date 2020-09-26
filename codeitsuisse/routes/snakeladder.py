@@ -126,7 +126,7 @@ def slsmsolution(boardSize,players,jumps):
 @app.route('/slsm', methods=['POST'])
 def evaluate_slsm():
     data = request.get_json();
-    logging.info("data sent for evaluation {}".format(data))
+    logging.info("data sent for evaluation   {}".format(data))
     boardSize = data.get("boardSize")
     players = data.get("players")
     jumps = data.get("jumps")
