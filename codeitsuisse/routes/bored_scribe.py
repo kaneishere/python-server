@@ -30,6 +30,8 @@ def solve(data):
                     cnt+=1
         for c in ori[ind:ind+l]:
             cnt+=ord(c)
+        if l==0:
+            cnt=ord(ori[0])
         for t in range(26):
             if cnt*t%26==offset:
                 ans['encryptionCount'] = t
