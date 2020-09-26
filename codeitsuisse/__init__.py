@@ -5,3 +5,5 @@ import codeitsuisse.routes.sort
 import codeitsuisse.routes.salad
 import codeitsuisse.routes.clean_floor
 import codeitsuisse.routes.revisitgeometry
+import codeitsuisse.routes.fruitbasket
+import codeitsuisse.routes.inventory
