@@ -15,7 +15,11 @@ def solve(data):
         for i in a:
             i['OptimalHedgeRatio']=round(i["CoRelationCoefficient"]*spot/i["FuturePrcVol"],3)
             i["NumFuturesContract"]=i['OptimalHedgeRatio']*v/(i["IndexFuturePrice"]*i["Notional"])
+<<<<<<< HEAD
         a.sort(key=lambda x:(x["NumFuturesContract"],x["OptimalHedgeRatio"]))
+=======
+        a.sort(key=lambda x:x["NumFuturesContract"])
+>>>>>>> a9f42de1b63a178404012ff0cbc522009cdcae04
         ans.append({"HedgePositionName":a[0]["Name"],"OptimalHedgeRatio":a[0]["OptimalHedgeRatio"],"NumFuturesContract":int(a[0]["NumFuturesContract"]+0.5)})
     return ans
 
