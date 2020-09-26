@@ -26,8 +26,8 @@ def fruitbasket():
     # random.seed() 
     # logging.info("My result :{}".format(result))
     ans = 0
-    for key,value in data.items():
-       ans +=  w[key] * value
+   #  for key,value in data.items():
+   #     ans +=  w[key] * value
 
     
     # print(ans)
