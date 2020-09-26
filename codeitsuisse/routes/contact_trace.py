@@ -71,7 +71,7 @@ def dfs(explored_sets, cur_gene, ans, name_to_genome, non_silent_mutation):
         if diff(cur_gene, gene, name_to_genome)[1]:
             non_silent = True
             prv = ans.pop()
-            ans.append("*" + prv)
+            ans.append(prv + "*")
             ans.append(gene)
         else:
             ans.append(gene)
