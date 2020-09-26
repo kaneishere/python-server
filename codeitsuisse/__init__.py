@@ -4,3 +4,4 @@ import codeitsuisse.routes.square
 import codeitsuisse.routes.sort
 import codeitsuisse.routes.salad
 import codeitsuisse.routes.clean_floor
+import codeitsuisse.routes.revisitgeometry
