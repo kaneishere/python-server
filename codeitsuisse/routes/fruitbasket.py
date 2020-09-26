@@ -12,7 +12,7 @@ prv = None
 
 @app.route('/fruitbasket', methods=['POST'])
 def fruitbasket():
-    data = request.get_json();
+    data = request.get_data();
     logging.info("data from request {}".format(data))
     # logging.info("data sent for evaluation {}".format(data))
     random.seed() 
