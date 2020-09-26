@@ -7,3 +7,4 @@ import codeitsuisse.routes.clean_floor
 import codeitsuisse.routes.revisitgeometry
 import codeitsuisse.routes.fruitbasket
 import codeitsuisse.routes.inventory
+import codeitsuisse.routes.GMO
