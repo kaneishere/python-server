@@ -12,3 +12,4 @@ import codeitsuisse.routes.GMO
 import codeitsuisse.routes.contact_trace
 import codeitsuisse.routes.cluster
 import codeitsuisse.routes.social_distancing
+import codeitsuisse.routes.optimizedportfolio
