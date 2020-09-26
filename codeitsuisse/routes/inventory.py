@@ -49,7 +49,7 @@ def evaluate_inventory():
         sol = [findsol(source, i) for i in items]
         sol = [(sol[i][0], items[i], sol[i][1]) for i in range(len(sol))]
         sol.sort()
-        sol = [i[2] for i in sol]
+        sol = [i[2] for i in sol][:10]
 
         # for i in range(len(sol)):
         #     ans = sol[i].split()
