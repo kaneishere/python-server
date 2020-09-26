@@ -1,7 +1,7 @@
 
 import heapq
 
-data = {'boardSize': 90, 'players': 3, 'jumps': ['78:8', '16:51', '32:87', '0:77', '49:21', '0:83', '46:41', '25:58', '45:0', '35:0', '73:34', '28:31']}
+data = {'boardSize': 64, 'players': 2, 'jumps': ['42:0', '41:61', '0:55', '63:35']}
 boardSize = data.get("boardSize")
 players = data.get("players")
 jumps = data.get("jumps")

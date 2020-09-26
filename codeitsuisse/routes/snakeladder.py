@@ -12,6 +12,7 @@ def slsmsolution(boardSize,players,jumps):
     G = {i:{} for i in range(1,boardSize+1)}
     laddersnake = {}
     isjumppoint = [0 for i in range(boardSize+5)]
+    issnake =  [0 for i in range(boardSize+5)]
 
     for jp in jumps:
         s, e = jp.split(':')
@@ -28,6 +29,7 @@ def slsmsolution(boardSize,players,jumps):
             G[s][e] = 0
             laddersnake[s] = e
             isjumppoint[s] = 1
+            issnake[s] = 1
 
     for i in range(1, boardSize):
         if(isjumppoint[i]):
@@ -82,11 +84,11 @@ def slsmsolution(boardSize,players,jumps):
     check1 = 0
     if(ans[0] == 1):
         ans[1] -= 1
-        if(isjumppoint[shortpath[1]-1]):
+        if(isjumppoint[shortpath[1]-1] and not issnake[shortpath[1]-1]):
             check1 = 1
     else:
         ans[0] -= 1
-        if(isjumppoint[shortpath[0]-1]):
+        if(isjumppoint[shortpath[0]-1] and not issnake[shortpath[0]-1]):
             check0 = 1
 
     ans = ans[::-1]
