@@ -54,11 +54,12 @@ def clean_floor():
     # logging.info("My result :{}".format(result))
     n = len(tests)
     results = { "answers" : {}}
-    for i in range(n):
-        ar = tests[str(i)]["floor"]
+    keys = list(tests.keys())
+    for key in keys:
+        ar = tests[key]["floor"]
         print(ar)
         ans = solve(ar)
-        results["answers"][str(i)] = ans
+        results["answers"][key] = ans
 
     return json.dumps(results);
 
