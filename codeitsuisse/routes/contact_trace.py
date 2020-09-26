@@ -65,10 +65,10 @@ def dfs(explored_sets, cur_gene, ans, name_to_genome, non_silent_mutation):
     # logging.info("to_explore: {}".format(to_explore))
     for gene in to_explore:
         non_silent = False
-        logging.info("non_silent: {}".format((cur_gene in non_silent_mutation and non_silent_mutation[gene]) or (cur_gene not in non_silent_mutation)))
-        if  ((cur_gene in non_silent_mutation and non_silent_mutation[gene]) or (cur_gene not in non_silent_mutation)):
-            ans.append(gene)
-        elif diff(cur_gene, gene, name_to_genome)[1]:
+        # logging.info("non_silent: {}".format((cur_gene in non_silent_mutation and non_silent_mutation[gene]) or (cur_gene not in non_silent_mutation)))
+        # if  ((cur_gene in non_silent_mutation and non_silent_mutation[gene]) or (cur_gene not in non_silent_mutation)):
+        #     ans.append(gene)
+        if diff(cur_gene, gene, name_to_genome)[1]:
             non_silent = True
             prv = ans.pop()
             ans.append("*" + prv)
@@ -131,6 +131,7 @@ def contact_trace():
     logging.info("non_silent {}".format(non_silent_mutation))
     dfs(explored_sets, infected['name'], ans, name_to_gene, non_silent_mutation)
     logging.info("data: {}".format(data))
+    logging.info("diff between genes {}".format(memo))
     logging.info("answers: {}".format(answers))
     return json.dumps(answers)
 
