@@ -44,13 +44,13 @@ def dfs(explored_sets, cur_gene, ans, name_to_genome):
     to_explore = []
     mx = 10000000000000
     mn = mx
-    logging.info("explored_sets: {}".format(explored_sets))
+    # logging.info("explored_sets: {}".format(explored_sets))
     for key, value in explored_sets.items():
         if value: continue
         cnt, non_silent = diff(cur_gene, key, name_to_genome)
         mn = min(mn, cnt)
-    logging.info("minimum diff: {}".format(mn))
-    logging.info("ans: {}".format(ans))
+    # logging.info("minimum diff: {}".format(mn))
+    # logging.info("ans: {}".format(ans))
     if mn == mx:
         if len(ans) > 1:
             
