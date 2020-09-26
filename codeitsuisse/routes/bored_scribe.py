@@ -221,7 +221,7 @@ def solve(data):
         if l==0:
             for t in range(100):
                 if cnt==tar:
-                    #ans['encryptionCount'] = t
+                    ans['encryptionCount'] = t
                     break
                 cnt+=cnt
                 if cnt>122:
@@ -230,7 +230,7 @@ def solve(data):
             for t in range(100):
                 print(cnt,t)
                 if cnt==tar:
-                    #ans['encryptionCount'] = t
+                    ans['encryptionCount'] = t
                     break
                 print(has,nn)
                 tmp=sum(has)+nn
@@ -241,7 +241,7 @@ def solve(data):
                 cnt+=tmp
                 if cnt>122:
                     cnt=(cnt-123)%26+97
-        #s=ori
+        s=ori
         '''
         s = ' '.join(segment(ori))
         tmp = s.split(' ')
@@ -268,7 +268,7 @@ def bored_scribe():
     logging.info("data sent for evaluation {}".format(data))
     result=solve(data)
     logging.info("My result :{}".format(result))
-    return json.dumps(result);
+    return jsonify(result);
 '''
 data=[ { "id": 1, "encryptedText": "bbdef" } ]
 print(solve(data))
