@@ -18,8 +18,9 @@ def fruitbasket():
     
     # logging.info("My result :{}".format(result))
     ans = 0
-    for key, value in data.items():
-        ans += value * random.randint(1,100)
+    if data:
+        for key, value in data.items():
+            ans += value * random.randint(1,100)
 
 
     return str(ans) 
