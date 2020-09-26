@@ -64,6 +64,7 @@ def slsmsolution(boardSize,players,jumps):
 
     ans = []
     path = [boardSize]
+    shortpath = []
     now = boardSize
     while True:
         pre = previous[now]
@@ -71,18 +72,47 @@ def slsmsolution(boardSize,players,jumps):
             break
         if(laddersnake.get(pre,0)!=now):
             ans.append(abs(now-pre))
+            shortpath.append(now)
         now = pre
         path.append(now)
 
-    print(path)
 
     tem = []
+    check0 = 0
+    check1 = 0
     if(ans[0] == 1):
         ans[1] -= 1
+        if(isjumppoint[shortpath[1]-1]):
+            check1 = 1
     else:
         ans[0] -= 1
+        if(isjumppoint[shortpath[0]-1]):
+            check0 = 1
 
-    for x in ans[::-1]:
+    ans = ans[::-1]
+    
+    for i in range(len(ans)-2):
+        x = ans[i]
+        for y in range(players):
+            tem.append(x)
+
+    x = ans[-2]
+    if(check1):
+        for y in range(players-1):
+            tem.append(x)
+            tem.append(1)
+        tem.append(x)
+    else:
+        for y in range(players):
+            tem.append(x)
+
+    x = ans[-1]
+    if(check0):
+        for y in range(players-1):
+            tem.append(x)
+            tem.append(1)
+        tem.append(x)
+    else:
         for y in range(players):
             tem.append(x)
 
