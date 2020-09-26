@@ -22,7 +22,7 @@ def processstring(str):
 
     print(cnt)
 
-    numACGT = cnt[min(cnt)]
+    numACGT = min(cnt['A'],cnt['T'],cnt['C'],cnt['G'])
     numCC = cnt['C']//2
 
 
