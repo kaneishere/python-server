@@ -166,7 +166,7 @@ class CaesarCipher(object):
             test_cipher = self.cipher()
 
             x = ' '.join(wordninja.split(test_cipher))
-            if(detect(x) == 'en' and detect(x) == 'en' and detect(x) == 'en' ):
+            if(x.count(' ')*4 < len(x) ):
                 return test_cipher
 
         return message

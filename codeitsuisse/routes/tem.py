@@ -1,3 +1,3 @@
-s = "a bcd"
+import wordninja
 
-print(''.join(s.split(' ')))
+print(wordninja.split("Iamaboy"))
