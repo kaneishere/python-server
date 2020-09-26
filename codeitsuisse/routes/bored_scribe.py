@@ -39,6 +39,7 @@ def solve(data):
         s = ' '.join(segment(ori))
         tmp = s.split(' ')
         p=0
+        '''
         if 'palindrome' in tmp:
             if 'is' in tmp:
                 iss=tmp.index('is')
@@ -51,6 +52,7 @@ def solve(data):
                                 s=' '.join(tmp[:i])+' '
                             s+=ttmp+' '+' '.join(tmp[iss:])
                             break
+        '''
         ans['originalText'] = s
         res.append(ans)
     return res
