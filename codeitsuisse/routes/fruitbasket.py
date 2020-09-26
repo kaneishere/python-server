@@ -22,7 +22,7 @@ def fruitbasket():
         ans += value * random.randint(1,100)
 
 
-    return ans
+    return str(ans) 
 
 
 
