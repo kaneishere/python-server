@@ -118,6 +118,8 @@ def contact_trace():
 
 
     dfs(explored_sets, infected['name'], ans, name_to_gene)
+    logging.info("data: {}".format(data))
+    logging.info("answers: {}".format(answers))
     return json.dumps(answers)
 
 
