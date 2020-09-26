@@ -14,7 +14,7 @@ last_sum = 0
 w = {'maPomegranate': 59,
  'maPineapple': 7,
  'maAvocado': 32,
- 'maRambutan': 42,
+ 'maRamubutan': 42,
  'maApple': 31,
  'maWatermelon': 83} 
 @app.route('/fruitbasket', methods=['POST'])
