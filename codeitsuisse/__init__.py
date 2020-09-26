@@ -8,3 +8,4 @@ import codeitsuisse.routes.revisitgeometry
 import codeitsuisse.routes.fruitbasket
 import codeitsuisse.routes.inventory
 import codeitsuisse.routes.GMO
+import codeitsuisse.routes.olympiad_of_babylon
