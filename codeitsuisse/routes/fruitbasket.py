@@ -8,7 +8,8 @@ from codeitsuisse import app;
 
 logger = logging.getLogger(__name__)
 
-prv = None
+last_guess = {}
+last_sum = 0
 
 @app.route('/fruitbasket', methods=['POST'])
 def fruitbasket():
@@ -16,21 +17,16 @@ def fruitbasket():
     data = json.loads(data.decode('utf-8'))
     logging.info("data from request {}".format(data))
     # logging.info("data sent for evaluation {}".format(data))
-    random.seed() 
+    # random.seed() 
     # logging.info("My result :{}".format(result))
-    ans = 0
-    values = list(data.values())
-    guesses = [80, 90, 50]
 
-    if data:
-        for value, guess in zip(values, guesses): 
-            
-            ans += value * guess 
-            guesses.append((value, guess))
     
-    print(ans)
-    logging.info("current guess: {}".format(guesses))
-    return str(ans) 
+
+    
+    # print(ans)
+    # logging.info("current guess: {}".format(guesses))
+    # last_sum = ans
+    return str(0) 
 
 
 
