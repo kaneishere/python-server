@@ -203,7 +203,6 @@ def solve(data):
         ans['id']=i
         cip = CaesarCipher(s)
         ori = cip.cracked
-        offset = (26+ord(s[0])-ord(ori[0]))%26
         nn,cnt,l,ind = 0,0,0,0
         for x in range(len(s)-1):
             for y in range(x+1,len(s)):
@@ -216,28 +215,32 @@ def solve(data):
         has=[]
         for c in ori[ind:ind+l]:
             has.append(ord(c))
-        cnt=sum(has)
         ans['encryptionCount'] = 0
+        tar=ord(s[0])
+        cnt=ord(ori[0])
         if l==0:
-            cnt=ord(ori[0])
-            for t in range(50):
-                if cnt%26==offset:
+            for t in range(100):
+                if cnt==tar:
                     ans['encryptionCount'] = t
                     break
                 cnt+=cnt
                 if cnt>122:
-                    cnt=(cnt-122)%26+96
+                    cnt=(cnt-123)%26+97
         else:
-            for t in range(50):
-                cnt+=nn
-                if cnt%26==offset:
+            for t in range(100):
+                print(cnt,t)
+                if cnt==tar:
                     ans['encryptionCount'] = t
                     break
+                print(has,nn)
+                tmp=sum(has)+nn
                 for i in range(len(has)):
-                    has[i]+=cnt
+                    has[i]+=tmp
                     if has[i]>122:
-                        has[i]=(has[i]-122)%26+96
-                cnt=sum(has)
+                        has[i]=(has[i]-123)%26+97
+                cnt+=tmp
+                if cnt>122:
+                    cnt=(cnt-123)%26+97
         s=ori
         '''
         s = ' '.join(segment(ori))
