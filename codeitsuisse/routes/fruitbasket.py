@@ -19,10 +19,12 @@ def fruitbasket():
     random.seed() 
     # logging.info("My result :{}".format(result))
     ans = 0
-    guesses = []
+    values = list(data.values())
+    guesses = [80, 90, 50]
+
     if data:
-        for key, value in data.items():
-            guess = random.randint(1,100)
+        for value, guess in zip(values, guesses): 
+            
             ans += value * guess 
             guesses.append((value, guess))
     print(ans)
