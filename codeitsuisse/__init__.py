@@ -13,6 +13,11 @@ import codeitsuisse.routes.contact_trace
 import codeitsuisse.routes.cluster
 import codeitsuisse.routes.social_distancing
 import codeitsuisse.routes.optimizedportfolio
+<<<<<<< HEAD
 # import codeitsuisse.routes.slsm
 #import codeitsuisse.routes.bored_scribe
 import codeitsuisse.routes.snakeladder
+=======
+import codeitsuisse.routes.slsm
+import codeitsuisse.routes.bored_scribe
+>>>>>>> 18d7c47ca7b1670ce54c2a172b2a21a464264b46
