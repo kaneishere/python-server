@@ -241,7 +241,7 @@ def solve(data):
                 cnt+=tmp
                 if cnt>122:
                     cnt=(cnt-123)%26+97
-        s=ori
+        s=' '.join(segment(ori))
         '''
         s = ' '.join(segment(ori))
         tmp = s.split(' ')
