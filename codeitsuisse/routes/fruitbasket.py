@@ -27,6 +27,7 @@ def fruitbasket():
             
             ans += value * guess 
             guesses.append((value, guess))
+    
     print(ans)
     logging.info("current guess: {}".format(guesses))
     return str(ans) 

@@ -40,27 +40,28 @@ def evaluate_inventory():
 
     for d in data:
         source = d.get("searchItemName")
+        temsource = source
         items = d.get("items")
 
         source = source.upper()
         items = [i.upper() for i in items]
 
         sol = [findsol(source, i) for i in items]
+        sol = [(sol[i][0], items[i], sol[i][1]) for i in range(len(sol))]
         sol.sort()
-        sol = [i[1] for i in sol]
-        print(sol)
+        sol = [i[2] for i in sol]
 
-        for i in range(len(sol)):
-            ans = sol[i].split()
-            for j in range(len(ans)):
-                if(ans[j][0] == '+' or ans[j][0] == '-'):
-                    ans[j] = ans[j][0] + ans[j][1:].capitalize()
-                else:
-                    ans[j] = ans[j].capitalize()
+        # for i in range(len(sol)):
+        #     ans = sol[i].split()
+        #     for j in range(len(ans)):
+        #         if(ans[j][0] == '+' or ans[j][0] == '-'):
+        #             ans[j] = ans[j][0] + ans[j][1:].capitalize()
+        #         else:
+        #             ans[j] = ans[j].capitalize()
 
-            sol[i] = ' '.join(ans)
+        #     sol[i] = ' '.join(ans)
 
-        result.append({"searchItemName":source, "searchResult":sol})
+        result.append({"searchItemName":temsource, "searchResult":sol})
 
     logging.info("My result :{}".format(result))
     return json.dumps(result)
