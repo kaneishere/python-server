@@ -1,163 +1,105 @@
 import logging
 import json
-import random
-from collections import deque
-
+import heapq
 from flask import request, jsonify;
 
 from codeitsuisse import app;
 
+
 logger = logging.getLogger(__name__)
 
-UP = -1
-DOWN = -2
+def slsmsolution(boardSize,players,jumps):
+    G = {i:{} for i in range(1,boardSize+1)}
+    laddersnake = {}
+    isjumppoint = [0 for i in range(boardSize+5)]
 
-best = []
-
-def compare(cur, dest, dist, q, parent, i=0):
-    if dist[cur] + 1 < dist[dest]:
-        q.append(dest)
-        dist[dest] = dist[cur] + 1
-        if i: 
-            parent[dest] = cur + i
-            parent[cur+i] = cur
-        else:
-            parent[dest] = cur
-
-def dfs(start, visited, n, rolls, jumps, cur_cost, mn):
-    if cur_cost >= mn:
-        return
-
-    if start > n:
-        start = n - (start - n)
-    
-    if start not in jumps:
-        if cur_cost < mn:
-            mn = cur_cost
-            best = [i for i in rolls] 
-        return 
-    
-    else: 
-        if jumps[start] == UP:
+    for jp in jumps:
+        s, e = jp.split(':')
+        s, e = int(s), int(e)
+        if(s == 0):
             for i in range(1,7):
-                dest = start + i
-                if dest == n: continue
-                rolls.append(i)
-                if dest > n: dest = n - (dest - n)
-                dfs(dest, visited, n, rolls,jumps, cur_cost + int(dest in visited), mn)
-                rolls.pop()
-            
-        elif jumps[start] == DOWN:
+                G[e][s+i] = 0
+            isjumppoint[e] = 1
+        elif(e == 0):
             for i in range(1,7):
-                rolls.append(i)
-                dest = start - i
-                if dest < 1: dest = 1 - dest 
-                dfs(dest, visited, n, rolls,jumps, cur_cost + int(dest in visited), mn)
-                rolls.pop()
-
+                G[s][s-i] = 0
+            isjumppoint[s] = 1
         else:
-            dfs(jumps[start], visited,n,rolls,jumps,cur_cost+int(jumps[start] in visited), mn)
+            G[s][e] = 0
+            laddersnake[s] = e
+            isjumppoint[s] = 1
 
-    
-    
-
-def solve(data):
-    n = data['boardSize']
-    players = data['players']
-    jumps = {}
-    parent = [-1] * (n+1)
-    for jump in data['jumps']:
-        start, end = map(int, jump.split(':'))
-        if start and end:
-            jumps[start] = end
-            
-        elif start == 0:
-            jumps[end] = DOWN 
-        else:
-            jumps[start] = UP
-
-    logging.info("jumps {}".format(jumps))
-    dist = [10000000000000000 for i in range(n+1)]
-    q = deque([1])
-    dist[1] = 0
-    while len(q):
-        cur = q.popleft()
-        for i in range(1,7):
-            if cur + i > n: continue
-            if cur + i not in jumps:
-                compare(cur, cur+i, dist, q, parent)
-            
-            else:
-                if jumps[cur+i] == UP:
-                    for j in range(1,7):
-                        if cur + i + j <= n:
-                            compare(cur, cur+i+j, dist, q, parent, i)
-                
-                elif jumps[cur+i] == DOWN:
-                    for j in range(1, 7):
-                        if cur + i - j >= 1:
-                            compare(cur, cur + i - j, dist, q, parent, i) 
-
-                else:
-                    compare(cur, jumps[cur+i], dist, q, parent, i)
-
-    logging.info("dist: {}".format(dist))
-    box = n
-    seq = []
-    logging.info("parent: {}".format(parent))
-    while box != -1:
-        seq.append(box)
-        box = parent[box]
-
-    seq.reverse()
-    visited = set(seq)
-    logging.info("sequence: {}".format(seq))
-    ret = []
-
-    prv_jmp = False 
-    for i in range(1,len(seq)):
-        # first one must be one
-        if not prv_jmp:
-            ret += [0] * (players-1)
-            prv_jmp = seq[i] in jumps
-        
-        if seq[i] != n:
-            ret.append(seq[i] - seq[i-1])
-        # print(ret)
-        # logging.info("seq[i] {}".format(seq[i]))
-            j = len(ret) - 2
-            fill = ret[len(ret)-1] 
-            while j >= 0 and ret[j] == 0:
-                ret[j] = fill
-                j -= 1
-
-        elif seq[i] == n:
-            start = seq[i-1]
-            mn = 1000000000000000000000000
-            dfs(start, visited, n, [], jumps, 0, mn)
-
-            logging.info("best: {}".format(best))             
-
-
-                     
+    for i in range(1, boardSize):
+        if(isjumppoint[i]):
+            continue
+        for j in range(1,7):
+            if(i+j > boardSize):
+                break
+            G[i][i+j] = 1
 
 
 
-    logging.info("ret: {}".format(ret))
-    
+    def calculate_distances(graph, starting_vertex):
+        distances = {vertex: float('infinity') for vertex in graph}
+        distances[starting_vertex] = 0
+        previous = {vertex: -1 for vertex in graph}
+
+        pq = [(0, starting_vertex)]
+        while len(pq) > 0:
+            current_distance, current_vertex = heapq.heappop(pq)
+            if current_distance > distances[current_vertex]:
+                continue
+
+            for neighbor, weight in graph[current_vertex].items():
+                distance = current_distance + weight
+                if distance < distances[neighbor]:
+                    distances[neighbor] = distance
+                    previous[neighbor] = current_vertex
+                    heapq.heappush(pq, (distance, neighbor))
+
+        return distances, previous
 
 
+    distances, previous = calculate_distances(G, 1)
+
+    ans = []
+    path = [boardSize]
+    now = boardSize
+    while True:
+        pre = previous[now]
+        if(pre==-1):
+            break
+        if(laddersnake.get(pre,0)!=now):
+            ans.append(abs(now-pre))
+        now = pre
+        path.append(now)
+
+    print(path)
+
+    tem = []
+    if(ans[0] == 1):
+        ans[1] -= 1
+    else:
+        ans[0] -= 1
+
+    for x in ans[::-1]:
+        for y in range(players):
+            tem.append(x)
+
+    tem[-1] += 1
+
+    return tem
 
 @app.route('/slsm', methods=['POST'])
-def slsm():
-    data = request.get_data() 
-
-    data = json.loads(data.decode('utf-8'))
-    # logging.info("data from request {}".format(data))
-    solve(data) 
-
-    # return json.dumps(answers)
-    return ""
+def evaluate_slsm():
+    data = request.get_json();
+    logging.info("data sent for evaluation {}".format(data))
+    boardSize = data.get("boardSize")
+    players = data.get("players")
+    jumps = data.get("jumps")
+    result = slsmsolution(boardSize,players,jumps)
+    logging.info("My result :{}".format(result))
+    return json.dumps(result)
 
 
 
