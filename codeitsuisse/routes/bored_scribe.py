@@ -5,7 +5,7 @@ from wordsegment import load, segment
 from flask import request, jsonify;
 
 from codeitsuisse import app;
-
+import wordninja
 
 from random import randrange
 import string
@@ -241,7 +241,7 @@ def solve(data):
                 cnt+=tmp
                 if cnt>122:
                     cnt=(cnt-123)%26+97
-        s=' '.join(segment(ori))
+        s=' '.join(wordninja.split(ori))
         '''
         s = ' '.join(segment(ori))
         tmp = s.split(' ')
