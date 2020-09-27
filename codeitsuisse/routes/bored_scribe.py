@@ -218,6 +218,7 @@ def solve(data):
         ans['encryptionCount'] = 0
         tar=ord(s[0])
         cnt=ord(ori[0])
+        #dont know why
         if l==0:
             for t in range(100):
                 if cnt==tar:
@@ -228,11 +229,9 @@ def solve(data):
                     cnt=(cnt-123)%26+97
         else:
             for t in range(100):
-                print(cnt,t)
                 if cnt==tar:
                     ans['encryptionCount'] = t
                     break
-                print(has,nn)
                 tmp=sum(has)+nn
                 for i in range(len(has)):
                     has[i]+=tmp
@@ -241,9 +240,9 @@ def solve(data):
                 cnt+=tmp
                 if cnt>122:
                     cnt=(cnt-123)%26+97
-        s=' '.join(wordninja.split(ori))
-        '''
+        #s=' '.join(wordninja.split(ori))
         s = ' '.join(segment(ori))
+        '''
         tmp = s.split(' ')
         p=0
         if 'palindrome' in tmp:
