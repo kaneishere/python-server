@@ -242,8 +242,16 @@ def solve(data):
                     cnt=(cnt-123)%26+97
         #s=' '.join(wordninja.split(ori))
         s = ' '.join(segment(ori))
-        '''
         tmp = s.split(' ')
+        if 'a' in tmp:
+            iss = tmp.index('a')
+            if tmp[iss+1]=='i':
+                if iss!=0:
+                    s=' '.join(tmp[:iss])+' '
+                s+='ai'
+                if iss+2!=len(tmp):
+                    s+=' '+' '.join(tmp[iss+2:]
+        '''
         p=0
         if 'palindrome' in tmp:
             if 'is' in tmp:
