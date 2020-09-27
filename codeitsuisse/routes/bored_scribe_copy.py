@@ -160,7 +160,7 @@ class CaesarCipher(object):
         entropy_values = {}
         attempt_cache = {}
         message = self.message
-        for i in range(26):
+        for i in range(26:0:-1):
             self.message = message
             self.offset = i * -1
             test_cipher = self.cipher()
