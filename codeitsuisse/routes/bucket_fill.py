@@ -50,8 +50,6 @@ def solvewater(circles, buckets, pipes):
     for pipe in pipes:
         up, down = pipe
         src, tgt = -1, -1
-        if(up[1] > down[1]):
-            up, down = down, up
         for i in range(up[1], -1, -1):
             if(img[up[0]][i] != -1):
                 src = img[up[0]][i]
