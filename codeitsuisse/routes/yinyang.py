@@ -24,7 +24,7 @@ def f(n,m,s):
                 tem[len(s)-1-i]=tem[i]
             elif (s[i]=='y' and s[len(s)-1-i]=='Y'):
                 continue
-            else:
+            elif i<=len(s)-1-i:
                 tem[i]=tt*x + dfs(s[:i]+s[i+1:], nowlevel+1, 1/(len(s)-1))
         #print(tem)
         for i in range(len(s)):
