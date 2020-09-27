@@ -238,7 +238,7 @@ def solve(data):
         tmp = wordninja.split(ori) 
         s=tmp[0]
         for i in range(1,len(tmp)):
-            if tmp[i]=='s' or tmp[i]=='i' and tmp[i-1]=='a':
+            if tmp[i]=='al' or tmp[i]=='in' and tmp[i-1]=='n' or tmp[i]=='ty' and tmp[i-1]=='in' or tmp[i]=='s' or tmp[i]=='i' and tmp[i-1]=='a':
                 s+=tmp[i]
             else:
                 s+=' '+tmp[i]
