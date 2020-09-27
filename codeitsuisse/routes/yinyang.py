@@ -21,8 +21,8 @@ def f(n,m,s):
             x = (1 if (s[i] == 'Y') else 0)
             if (s[i]=='Y' and s[len(s)-1-i]=='y'):
                 tem[i]=tt*x + dfs(s[:i]+s[i+1:], nowlevel+1, 1/(len(s)-1))
-                tem[len(s)-1-i]=tmp[i]
-            else if (s[i]=='y' and s[len(s)-1-i]=='Y'):
+                tem[len(s)-1-i]=tem[i]
+            elif (s[i]=='y' and s[len(s)-1-i]=='Y'):
                 continue
             else:
                 tem[i]=tt*x + dfs(s[:i]+s[i+1:], nowlevel+1, 1/(len(s)-1))
