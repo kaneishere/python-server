@@ -224,11 +224,9 @@ def solve(data):
                     cnt=(cnt-123)%26+97
         else:
             for t in range(100):
-                print(cnt,t)
                 if cnt==tar:
                     ans['encryptionCount'] = t
                     break
-                print(has,nn)
                 tmp=sum(has)+nn
                 for i in range(len(has)):
                     has[i]+=tmp
@@ -237,7 +235,13 @@ def solve(data):
                 cnt+=tmp
                 if cnt>122:
                     cnt=(cnt-123)%26+97
-        s=' '.join(wordninja.split(ori))
+        tmp = wordninja.split(ori) 
+        s=tmp[0]
+        for i in range(1,len(tmp)):
+            if tmp[i]=='s' or tmp[i]=='i' and tmp[i-1]=='a':
+                s+=tmp[i]
+            else:
+                s+=' '+tmp[i]
         ans['originalText'] = s
         res.append(ans)
     return res
