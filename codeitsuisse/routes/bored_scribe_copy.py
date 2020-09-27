@@ -224,11 +224,9 @@ def solve(data):
                     cnt=(cnt-123)%26+97
         else:
             for t in range(100):
-                print(cnt,t)
                 if cnt==tar:
                     ans['encryptionCount'] = t
                     break
-                print(has,nn)
                 tmp=sum(has)+nn
                 for i in range(len(has)):
                     has[i]+=tmp
