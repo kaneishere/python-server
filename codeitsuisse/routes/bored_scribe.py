@@ -243,14 +243,13 @@ def solve(data):
         #s=' '.join(wordninja.split(ori))
         s = ' '.join(segment(ori))
         tmp = s.split(' ')
-        if 'a' in tmp:
-            iss = tmp.index('a')
-            if tmp[iss+1]=='i':
-                if iss!=0:
-                    s=' '.join(tmp[:iss])+' '
-                s+='ai'
-                if iss+2!=len(tmp):
-                    s+=' '+' '.join(tmp[iss+2:]
+        s=tmp[0]
+        for i in range(1,len(tmp)):
+            if tmp[i]=='s' or tmp[i]=='i' and tmp[i-1]=='a':
+                s+=tmp[i]
+            else:
+                s+=' '+tmp[i]
+
         '''
         p=0
         if 'palindrome' in tmp:
