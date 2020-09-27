@@ -19,3 +19,4 @@ import codeitsuisse.routes.optimizedportfolio
 import codeitsuisse.routes.snakeladder
 import codeitsuisse.routes.tem
 import codeitsuisse.routes.bucket_fill
+import codeitsuisse.routes.supermarket
