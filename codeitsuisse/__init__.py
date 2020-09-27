@@ -17,5 +17,7 @@ import codeitsuisse.routes.optimizedportfolio
 #import codeitsuisse.routes.bored_scribe
 # import codeitsuisse.routes.bored_scribe_copy
 import codeitsuisse.routes.snakeladder
+
 import codeitsuisse.routes.yinyang
 import codeitsuisse.routes.bucket_fill
+import codeitsuisse.routes.supermarket
