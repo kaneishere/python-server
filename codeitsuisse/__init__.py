@@ -21,4 +21,4 @@ import codeitsuisse.routes.snakeladder
 import codeitsuisse.routes.yinyang
 import codeitsuisse.routes.bucket_fill
 import codeitsuisse.routes.supermarket
-import codeitsuisse.routes.pretick
+# import codeitsuisse.routes.pretick
