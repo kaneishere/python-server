@@ -1,9 +1,9 @@
 import logging
 import json
 import io
-import pandas as pd
+# import pandas as pd
 
-from pyramid.arima import auto_arima
+# from pyramid.arima import auto_arima
 from collections import deque
 from flask import request, jsonify;
 
