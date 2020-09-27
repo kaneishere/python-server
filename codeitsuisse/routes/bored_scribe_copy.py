@@ -235,8 +235,7 @@ def solve(data):
                 cnt+=tmp
                 if cnt>122:
                     cnt=(cnt-123)%26+97
-        s=' '.join(wordninja.split(ori))
-        tmp = s.split(' ')
+        tmp = wordninja.split(ori) 
         s=tmp[0]
         for i in range(1,len(tmp)):
             if tmp[i]=='s' or tmp[i]=='i' and tmp[i-1]=='a':
