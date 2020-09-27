@@ -9,7 +9,7 @@ from codeitsuisse import app;
 logger = logging.getLogger(__name__)
 
 def solve(data):
-    answers = {}
+    answers = { "answers": {}}
     d = [(1,0), (0,1), (-1,0), (0,-1)]
     for key, value in data.items():
         # tuple
@@ -37,9 +37,9 @@ def solve(data):
                         q.append((nx,ny))
         
         if dist[dest[0]][dest[1]] == mx:
-            answers[key] = -1
+            answers['answers'][key] = -1
         else:
-            answers[key] = dist[dest[0]][dest[1]]
+            answers['answers'][key] = dist[dest[0]][dest[1]]
 
     return answers
 
