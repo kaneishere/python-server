@@ -1,9 +1,12 @@
 import logging
 import json
 import io
-# import pandas as pd
+import pandas as pd
+import numpy as np
+# from sklearn.preprocessing import MinMaxScaler
+# from keras.models import Sequential
+# from keras.layers import Dense, Dropout, LSTM
 
-# from pyramid.arima import auto_arima
 from collections import deque
 from flask import request, jsonify;
 
@@ -25,25 +28,11 @@ def pre_tick():
     logging.info("data: {}".format(data))
     print(df)
     # df = pd.read_csv(data_str, sep=",")
-    print(df)
     # logging.info("df: {}".format(df))
     # logging.info("data from request {}".format(data))
     # logging.info("data sent for evaluation {}".format(data))
-    data = df.sort_index(ascending=True, axis=0)
+    dataset = df.sort_index(ascending=True, axis=0)
+    df['Predict'] = df['Close'].rolling(window=50).mean()
+    print(df['Predict'])
 
-    n = len(data)
-    train = data[:n]
-    # val = data[0.7 * n:]
-    training = train['Close']
-    # validation = val['Close']
-
-    model = auto_arima(training)
-    model.fit(training)
-
-    forecast = model.predict(n_periods=1)
-    # forecast = pd.DataFrame(forecast,index = valid.index,columns=['Prediction'])    
-    print(forecast)
-
-
-
-    return str(forecast[0]) 
+    return str(df['Predict'][len(df)-1]) 

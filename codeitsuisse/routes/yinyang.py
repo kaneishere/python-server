@@ -20,12 +20,12 @@ def f(n,m,s):
         for i in range(len(s)):
             x = (1 if (s[i] == 'Y') else 0)
             if (s[i]=='Y' and s[len(s)-1-i]=='y'):
-                tem[i]=tt*x + dfs(s[:i]+s[i+1:], nowlevel+1, 1/(len(s)-1))
+                tem[i]=tt*x + dfs(s[:i]+s[i+1:], nowlevel+1, 1/max(1,len(s)-1))
                 tem[len(s)-1-i]=tem[i]
             elif (s[i]=='y' and s[len(s)-1-i]=='Y'):
                 continue
             elif i<=len(s)-1-i:
-                tem[i]=tt*x + dfs(s[:i]+s[i+1:], nowlevel+1, 1/(len(s)-1))
+                tem[i]=tt*x + dfs(s[:i]+s[i+1:], nowlevel+1, 1/max(1,len(s)-1))
         #print(tem)
         for i in range(len(s)):
             maxx += max(tem[i], tem[len(s)-1-i])
